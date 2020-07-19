@@ -42,10 +42,21 @@ class UsersController extends AppController
      */
     public function index()
     {
+        // Realizar busqueda con el key del users/index
+        $key=$this->request->getQuery('key');
+        if ($key) {
+            // Query para un solo tipo de busqueda osea solo buscar por el nombre de usuario
+            // $query=$this->Users->find('all')->where(['username like'=>'%'.$key.'%']);
+            $query=$this->Users->find('all')
+            ->where(['Or' =>['username like'=>'%'.$key.'%','correo like'=>'%'.$key.'%']]);
+        } else {
+            $query=$this->Users;
+        }
+        
         // Verificar los datos SESSION pero en vez de eso se usa $this->Auth->user()
         // debug($this->Auth->user('username'));
         // exit;
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($query);
 
         $this->set(compact('users'));
     }

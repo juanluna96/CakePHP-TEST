@@ -12,6 +12,13 @@
     <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Users') ?></h3>
     <div class="table-responsive">
+
+        <!-- Crear buscador usando el metodo get -->
+        <?php echo $this->Form->create(null, ['type'=>'get']); ?>
+        <?php echo $this->Form->control('key',['label'=>'Busqueda', 'value'=>$this->request->getQuery('key')]); ?>
+        <?php echo $this->Form->submit(); ?>
+        <?php echo $this->Form->end(); ?>
+
         <table>
             <thead>
                 <tr>
