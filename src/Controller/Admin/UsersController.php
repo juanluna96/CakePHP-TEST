@@ -13,6 +13,7 @@ use App\Controller\Admin\AppController;
 class UsersController extends AppController
 {
 
+    // Controlador para el login de cakephp/admin
     public function login()
     {
         if ($this->request->is('post')) {
@@ -29,6 +30,7 @@ class UsersController extends AppController
 
     }
 
+    // Metodo para el boton de deslogear
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
@@ -40,6 +42,9 @@ class UsersController extends AppController
      */
     public function index()
     {
+        // Verificar los datos SESSION pero en vez de eso se usa $this->Auth->user()
+        // debug($this->Auth->user('username'));
+        // exit;
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));

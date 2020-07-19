@@ -44,9 +44,14 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
+        // Permite crear el login() en el admin/Userscontroller
         $this->loadComponent('Auth');
 
+        // Paginas permitidas a mostrar antes de loguearse
         $this->Auth->allow(['login']);
+
+        $this->set('nombre_usuario',$this->Auth->user('username'));
+
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
