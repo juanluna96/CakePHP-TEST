@@ -162,7 +162,7 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
 
-        $ruta_imagen=WWW_ROOT.'img'.DS.$user->imagen;
+        $ruta_imagen=WWW_ROOT.'img'.DS.$user->image;
 
         if ($this->Users->delete($user)) {
             // Eliminar imagen de la carpeta al eliminar el usuario

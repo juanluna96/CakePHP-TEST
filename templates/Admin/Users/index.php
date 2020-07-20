@@ -21,7 +21,7 @@
     <div class="table-responsive"> 
         <!-- Crear formulario valido para los checkbox-->
         <?php echo $this->Form->create(null,['url'=>['action'=>'borrarTodos']]); ?>
-        <button>Borrar todos</button>
+        <button>Borrar seleccionados</button>
         <table>
             <thead>
                 <tr>
@@ -53,13 +53,14 @@
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['block'=>true,'confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
         <?php echo $this->Form->end(); ?>
+        <?php echo $this->fetch('postLink'); ?>
     </div>
     <div class="paginator">
         <ul class="pagination">
