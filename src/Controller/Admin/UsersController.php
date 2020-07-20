@@ -87,15 +87,44 @@ class UsersController extends AppController
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+        /*============================================================================
+        =            Insertar archivos o imagenes mediante el controlador            =
+        ============================================================================*/
 
-                return $this->redirect(['action' => 'index']);
+        if (!$user->getErrors) {
+            $archivo_imagen = $this->request->getData('archivo_imagen');
+            $nombre=$archivo_imagen->getClientFilename();
+
+            // Crear un directorio nuevo para guardar imagenes y archivos
+            if (!is_dir(WWW_ROOT.'img'.DS.'imagenes-usuarios')) {
+                mkdir(WWW_ROOT.'img'.DS.'imagenes-usuarios',0775);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            
+
+            $targetPath=WWW_ROOT.'img'.DS.'imagenes-usuarios'.DS.$nombre;
+
+            if ($nombre) {
+                $archivo_imagen->moveTo($targetPath);
+                $user->imagen='imagenes-usuarios/'.$nombre;
+            }
         }
-        $this->set(compact('user'));
+
+        // debug($archivo_imagen);
+        // exit;
+
+        /*=====  End of Insertar archivos o imagenes mediante el controlador  ======*/
+
+        
+
+        if ($this->Users->save($user)) {
+            $this->Flash->success(__('The user has been saved.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('The user could not be saved. Please, try again.'));
     }
+    $this->set(compact('user'));
+}
 
     /**
      * Edit method

@@ -26,6 +26,8 @@
                     <th><?= $this->Paginator->sort('username') ?></th>
                     <th><?= $this->Paginator->sort('correo') ?></th>
                     <th><?= $this->Paginator->sort('password') ?></th>
+                    <!-- Mostrar imagen en el html -->
+                    <th><?= $this->Paginator->sort('Imagen') ?></th>
                     <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
                     <th><?= $this->Paginator->sort('fecha_modificacion') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -38,6 +40,8 @@
                         <td><?= h($user->username) ?></td>
                         <td><?= h($user->correo) ?></td>
                         <td><?= h($user->password) ?></td>
+                        <!-- Mostrar imagen en el html -->
+                        <td><?php echo @$this->Html->image($user->imagen); ?></td>
                         <td><?= h($user->fecha_creacion) ?></td>
                         <td><?= h($user->fecha_modificacion) ?></td>
                         <td class="actions">
