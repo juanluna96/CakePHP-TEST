@@ -169,4 +169,26 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /*=====================================================================================
+    =            Borrar los registros usando los checkbox de la tabla usuarios            =
+    =====================================================================================*/
+
+    public function borrarTodos()
+    {
+
+        $this->request->allowMethod(['post', 'delete']);
+        $ids=$this->request->getData('ids');
+
+        if ($this->Users->deleteAll(['Users.id IN'=>$ids])) {
+            $this->Flash->success(__('The user has been deleted.'));
+        }
+        
+        return $this->redirect(['action' => 'index']);
+
+    }
+
+    /*=====  End of Borrar los registros usando los checkbox de la tabla usuarios  ======*/
+
+
 }
