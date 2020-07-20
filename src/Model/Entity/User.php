@@ -31,6 +31,8 @@ class User extends Entity
         'username' => true,
         'correo' => true,
         'password' => true,
+        // Cambiar estado de inactivo a activo o viceversa 
+        'estado'=>true,
         'fecha_creacion' => true,
         'fecha_modificacion' => true,
     ];

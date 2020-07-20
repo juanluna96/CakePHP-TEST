@@ -32,6 +32,8 @@
                     <th><?= $this->Paginator->sort('password') ?></th>
                     <!-- Mostrar imagen en el html -->
                     <th><?= $this->Paginator->sort('Imagen') ?></th>
+                    <!-- Cambiar estado de activo a inactivo o viseversa -->
+                    <th><?= $this->Paginator->sort('Cambiar estado') ?></th>
                     <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
                     <th><?= $this->Paginator->sort('fecha_modificacion') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -48,28 +50,36 @@
                         <td><?= h($user->password) ?></td>
                         <!-- Mostrar imagen en el html -->
                         <td><?php echo @$this->Html->image($user->imagen,['style'=>'max-width:100px;height:100px;border-radius:50%;']); ?></td>
-                        <td><?= h($user->fecha_creacion) ?></td>
-                        <td><?= h($user->fecha_modificacion) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['block'=>true,'confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <?php echo $this->Form->end(); ?>
-        <?php echo $this->fetch('postLink'); ?>
+                        <!-- Cambiar estado de activo a inactivo o viseversa -->
+                        <td>
+                            <?php if ($user->estado==1): ?>
+                                <?= $this->Form->postLink(__('Inactivar'), ['action' => 'usuarioEstado', $user->id,$user->estado], ['block'=>true,'confirm' => __('Estas seguro de desactivar al usuario # {0}?', $user->id)]) ?>
+                                <?php else: ?>
+                                    <?= $this->Form->postLink(__('Activar'), ['action' => 'usuarioEstado', $user->id,$user->estado], ['block'=>true,'confirm' => __('Estas seguro de activar al usuario # {0}?', $user->id)]) ?>
+                                <?php endif ?>
+                            </td>
+                            <td><?= h($user->fecha_creacion) ?></td>
+                            <td><?= h($user->fecha_modificacion) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['block'=>true,'confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php echo $this->Form->end(); ?>
+            <?php echo $this->fetch('postLink'); ?>
+        </div>
+        <div class="paginator">
+            <ul class="pagination">
+                <?= $this->Paginator->first('<< ' . __('first')) ?>
+                <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                <?= $this->Paginator->numbers() ?>
+                <?= $this->Paginator->next(__('next') . ' >') ?>
+                <?= $this->Paginator->last(__('last') . ' >>') ?>
+            </ul>
+            <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        </div>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
-</div>

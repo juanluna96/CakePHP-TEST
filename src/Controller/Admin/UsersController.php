@@ -22,7 +22,13 @@ class UsersController extends AppController
             // exit;
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller'=>'Users','action'=>'index']);
+                // Validar estado activo o inactivo
+                if ($user['estado']== 0) {
+                    $this->Flash->error("Usuario no activo por favor contacte con alguno activo!");
+                    return $this->redirect(['controller'=>'Users','action'=>'logout']);
+                }else{
+                    return $this->redirect(['controller'=>'Users','action'=>'index']);
+                }
             }else{
                 $this->Flash->error("Usuario o contraseña incorrecto!");
             }
@@ -53,11 +59,11 @@ class UsersController extends AppController
             $query=$this->Users;
         }
         
+
         // Verificar los datos SESSION pero en vez de eso se usa $this->Auth->user()
         // debug($this->Auth->user('username'));
         // exit;
         $users = $this->paginate($query);
-
         $this->set(compact('users'));
     }
 
@@ -73,6 +79,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
+
 
         $this->set(compact('user'));
     }
@@ -196,6 +203,31 @@ class UsersController extends AppController
     }
 
     /*=====  End of Borrar los registros usando los checkbox de la tabla usuarios  ======*/
+
+    /*=======================================================================
+    =            Cambiar estado de inactivo a activo o viceversa            =
+    =======================================================================*/
+    
+    public function usuarioEstado($id=null,$estado)
+    {
+        $this->request->allowMethod(['post']);
+        $user = $this->Users->get($id);
+
+        if ($estado==1) {
+            $user->estado=0;
+        }else{
+            $user->estado*1;
+        }
+        
+        if ($this->Users->save($user)) {
+            $this->Flash->success(__('El estado del usuario ha sido cambiado.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+    
+    /*=====  End of Cambiar estado de inactivo a activo o viceversa  ======*/
+    
 
 
 }
