@@ -40,6 +40,8 @@ class UsersTable extends Table
         $this->setTable('users');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+        //Anadir de otra tabla de la base de datos perfiles usando llaves foreanas
+        $this->hasOne('Perfiles');
     }
 
     /**

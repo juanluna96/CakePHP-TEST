@@ -33,6 +33,8 @@ class User extends Entity
         'password' => true,
         // Cambiar estado de inactivo a activo o viceversa 
         'estado'=>true,
+        //Anadir de otra tabla de la base de datos perfiles a la validacion
+        'perfile'=>true,
         'fecha_creacion' => true,
         'fecha_modificacion' => true,
     ];

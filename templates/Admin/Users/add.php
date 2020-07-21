@@ -21,6 +21,8 @@
                 echo $this->Form->control('username');
                 echo $this->Form->control('correo');
                 echo $this->Form->control('password');
+                // Crear campo para la tabla perfiles de la base de datos
+                echo $this->Form->control('perfile.telefono');
                 //Adicionamos el control para las imagenes de usuario
                 echo $this->Form->control('archivo_imagen',['type'=>'file']);
                 // echo $this->Form->control('fecha_creacion');

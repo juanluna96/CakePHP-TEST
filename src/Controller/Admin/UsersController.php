@@ -145,15 +145,14 @@ class UsersController extends AppController
     {
 
         $user = $this->Users->get($id);
-        // Conseguir tiempo actual y ponerlo en modificacion
-        $now = FrozenTime::now();
-        $ahora_colombia=$now->i18nFormat(null, 'America/Mexico_City');
-
-        $user->fecha_modificacion=$ahora_colombia;
+        
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-
+            // Conseguir tiempo actual y ponerlo en modificacion
+            date_default_timezone_set('America/Mexico_City');
+            $now = FrozenTime::now();
+            $user->fecha_modificacion=$now;
             /*==========================================================================
             =            Editar archivos o imagenes mediante el controlador            =
             ==========================================================================*/
