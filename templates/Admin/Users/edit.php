@@ -18,15 +18,18 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="users form content">
-            <?= $this->Form->create($user) ?>
+            <!-- Editar o cambiar imagen al editar usuario -->
+            <?= $this->Form->create($user,['type'=>'file']) ?>
             <fieldset>
                 <legend><?= __('Edit User') ?></legend>
                 <?php
-                    echo $this->Form->control('username');
-                    echo $this->Form->control('correo');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('fecha_creacion');
-                    echo $this->Form->control('fecha_modificacion', ['empty' => true]);
+                echo $this->Form->control('username');
+                echo $this->Form->control('correo');
+                // Editar o cambiar imagen al editar usuario
+                echo $this->Form->control('cambiar_imagen',['type'=>'file']);
+                //echo $this->Form->control('password');
+                //echo $this->Form->control('fecha_creacion');
+                //echo $this->Form->control('fecha_modificacion', ['empty' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

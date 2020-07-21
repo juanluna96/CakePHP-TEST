@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use Cake\I18n\FrozenTime;
 
 /**
  * Users Controller
@@ -142,11 +143,46 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+
+        $user = $this->Users->get($id);
+        // Conseguir tiempo actual y ponerlo en modificacion
+        $now = FrozenTime::now();
+        $ahora_colombia=$now->i18nFormat(null, 'America/Mexico_City');
+
+        $user->fecha_modificacion=$ahora_colombia;
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            /*==========================================================================
+            =            Editar archivos o imagenes mediante el controlador            =
+            ==========================================================================*/
+            
+            if (!$user->getErrors) {
+                $archivo_imagen = $this->request->getData('cambiar_imagen');
+                $nombre=$archivo_imagen->getClientFilename();
+
+                if ($nombre) {
+                // Crear un directorio nuevo para guardar imagenes y archivos
+                    if (!is_dir(WWW_ROOT.'img'.DS.'imagenes-usuarios')) {
+                        mkdir(WWW_ROOT.'img'.DS.'imagenes-usuarios',0775);
+                    }
+
+                    $ruta_imagen=WWW_ROOT.'img'.DS.'imagenes-usuarios'.DS.$nombre;
+
+                    $archivo_imagen->moveTo($ruta_imagen);
+
+                    $ruta_imagen_antigua=WWW_ROOT.'img'.DS.$user->imagen;
+                    if (file_exists($ruta_imagen_antigua)) {
+                        unlink($ruta_imagen_antigua);
+                    }
+
+                    $user->imagen='imagenes-usuarios/'.$nombre;
+                }
+            }
+            
+            /*=====  End of Editar archivos o imagenes mediante el controlador  ======*/
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -169,7 +205,7 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
 
-        $ruta_imagen=WWW_ROOT.'img'.DS.$user->image;
+        $ruta_imagen=WWW_ROOT.'img'.DS.$user->imagen;
 
         if ($this->Users->delete($user)) {
             // Eliminar imagen de la carpeta al eliminar el usuario
