@@ -27,6 +27,9 @@
                 echo $this->Form->control('archivo_imagen',['type'=>'file']);
                 // echo $this->Form->control('fecha_creacion');
                 // echo $this->Form->control('fecha_modificacion', ['empty' => true]);
+                // Crear campo para la tabla skills de la base de datos
+                echo $this->Form->control('skills.0.nombre');
+                echo $this->Form->control('skills.1.nombre');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

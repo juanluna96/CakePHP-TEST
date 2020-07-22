@@ -35,6 +35,8 @@ class User extends Entity
         'estado'=>true,
         //Anadir de otra tabla de la base de datos perfiles a la validacion
         'perfile'=>true,
+        //Al ser una relacion n a n las tablas usuario y skills entonces se coloca en plural en la validacion
+        'skills'=>true,
         'fecha_creacion' => true,
         'fecha_modificacion' => true,
     ];

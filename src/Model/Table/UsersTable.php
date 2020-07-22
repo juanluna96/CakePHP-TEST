@@ -42,6 +42,8 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
         //Anadir de otra tabla de la base de datos perfiles usando llaves foreanas
         $this->hasOne('Perfiles');
+        //Anadir de otra tabla de la base de datos skills usando llaves foreanas
+        $this->hasMany('Skills');
     }
 
     /**
