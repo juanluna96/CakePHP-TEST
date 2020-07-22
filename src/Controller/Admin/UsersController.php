@@ -65,7 +65,7 @@ class UsersController extends AppController
         // debug($this->Auth->user('username'));
         // exit;
         //Anadir de otra tabla de la base de datos perfiles usando llaves foreanas y mostrarla en la vista/index
-        $users = $this->paginate($query,['contain'=>'Perfiles']);
+        $users = $this->paginate($query,['contain'=>['Perfiles','Skills']]);
         $this->set(compact('users'));
     }
 

@@ -33,10 +33,12 @@
                     <!-- Mostrar imagen en el html -->
                     <th><?= $this->Paginator->sort('Imagen') ?></th>
                     <th>Telefono</th>
+                    <th>Habilidades</th>
+                    <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
+                    <!-- <th><?= $this->Paginator->sort('fecha_modificacion') ?></th> -->
                     <!-- Cambiar estado de activo a inactivo o viseversa -->
                     <th><?= $this->Paginator->sort('Cambiar estado') ?></th>
-                    <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
-                    <th><?= $this->Paginator->sort('fecha_modificacion') ?></th>
+
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -53,6 +55,14 @@
                         <td><?php echo @$this->Html->image($user->imagen,['style'=>'max-width:100px;height:100px;border-radius:50%;']); ?></td>
                         <!-- Anadir de otra tabla de la base de datos perfiles usando llaves foreanas -->
                         <td><?= @h($user->perfile->telefono) ?></td>
+                        <!-- Anadir de otra tabla de la base de datos perfiles usando llaves foreanas para la tabla habilidades que es una relacion de muchos a muchos -->
+                        <td>
+                            <?php foreach ($user->skills as $key => $habilidad): ?>
+                                <?php echo $habilidad->nombre.'<br>'; ?>
+                            <?php endforeach ?>
+                        </td>
+                        <td><?= h($user->fecha_creacion) ?></td>
+                        <!-- <td><?= h($user->fecha_modificacion) ?></td> -->
                         <!-- Cambiar estado de activo a inactivo o viseversa -->
                         <td>
                             <?php if ($user->estado==1): ?>
@@ -61,8 +71,7 @@
                                     <?= $this->Form->postLink(__('Activar'), ['action' => 'usuarioEstado', $user->id,$user->estado], ['block'=>true,'confirm' => __('Estas seguro de activar al usuario # {0}?', $user->id)]) ?>
                                 <?php endif ?>
                             </td>
-                            <td><?= h($user->fecha_creacion) ?></td>
-                            <td><?= h($user->fecha_modificacion) ?></td>
+                            
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
