@@ -29,9 +29,10 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('username') ?></th>
                     <th><?= $this->Paginator->sort('correo') ?></th>
-                    <th><?= $this->Paginator->sort('password') ?></th>
+                    <!-- <th><?= $this->Paginator->sort('password') ?></th> -->
                     <!-- Mostrar imagen en el html -->
                     <th><?= $this->Paginator->sort('Imagen') ?></th>
+                    <th>Telefono</th>
                     <!-- Cambiar estado de activo a inactivo o viseversa -->
                     <th><?= $this->Paginator->sort('Cambiar estado') ?></th>
                     <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
@@ -47,9 +48,11 @@
                         <td><?= $this->Number->format($user->id) ?></td>
                         <td><?= h($user->username) ?></td>
                         <td><?= h($user->correo) ?></td>
-                        <td><?= h($user->password) ?></td>
+                        <!-- <td><?= h($user->password) ?></td> -->
                         <!-- Mostrar imagen en el html -->
                         <td><?php echo @$this->Html->image($user->imagen,['style'=>'max-width:100px;height:100px;border-radius:50%;']); ?></td>
+                        <!-- Anadir de otra tabla de la base de datos perfiles usando llaves foreanas -->
+                        <td><?= @h($user->perfile->telefono) ?></td>
                         <!-- Cambiar estado de activo a inactivo o viseversa -->
                         <td>
                             <?php if ($user->estado==1): ?>

@@ -64,7 +64,8 @@ class UsersController extends AppController
         // Verificar los datos SESSION pero en vez de eso se usa $this->Auth->user()
         // debug($this->Auth->user('username'));
         // exit;
-        $users = $this->paginate($query);
+        //Anadir de otra tabla de la base de datos perfiles usando llaves foreanas y mostrarla en la vista/index
+        $users = $this->paginate($query,['contain'=>'Perfiles']);
         $this->set(compact('users'));
     }
 
