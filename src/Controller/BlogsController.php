@@ -11,6 +11,20 @@ class BlogsController extends AppController
 	public function beforeFilter(EventInterface $event)
 	{
 		$this->viewBuilder()->setLayout('blog');
+
+		/*====================================================================
+		=            Crear Dropdown o Menu colapsable para el Nav            =
+		====================================================================*/
+		
+		$this->loadModel('Menus');
+
+		$menus=$this->Menus->find('all',['contain'=>['Submenus']]);
+
+		$this->set('menus',$menus);
+		
+		/*=====  End of Crear Dropdown o Menu colapsable para el Nav  ======*/
+		
+		
         // debug($event);
         // exit;
 	}

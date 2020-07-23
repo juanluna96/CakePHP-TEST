@@ -15,30 +15,56 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->Url->build(['controller'=>'blogs', 'action'=>'contact']); ?>">Contact</a>
 			</li>
-		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item">
-					<a class="nav-link mr-sm-2" href="#"><span class="fas fa-user mr-1"></span>Sign up</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link mr-sm-2" href="#"><span class="fas fa-sign-in-alt mr-1"></span>Login</a>
-				</li>
+			
+			<!--===============================================================================
+			=            Menu desplegable que hace uso de llaves foreanas en la BD            =
+			================================================================================-->
+			
+			<?php foreach ($menus as $key => $menu): ?>
+				<?php if (empty($menu->submenus)): ?>
+					<li class="nav-item">
+						<a class="nav-link" href="#"><?php echo $menu->nombre ?></a>
+					</li>
+					<?php else: ?>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<?php echo $menu->nombre ?>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<?php foreach ($menu->submenus as $key => $submenu): ?>
+									<a class="dropdown-item" href="#"><?php echo $submenu->nombre ?></a>
+								<?php endforeach ?>
+							</div>
+						</li>
+					<?php endif ?>
+				<?php endforeach ?>
 
+				<!--====  End of Menu desplegable que hace uso de llaves foreanas en la BD====-->
+				
 			</ul>
-		</form>
-	</div>
-</nav>
+			<form class="form-inline my-2 my-lg-0">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link mr-sm-2" href="#"><span class="fas fa-user mr-1"></span>Sign up</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link mr-sm-2" href="#"><span class="fas fa-sign-in-alt mr-1"></span>Login</a>
+					</li>
 
-<!-- Script para el nav activo dependiendo de la pagina donde estemos -->
-<script type="text/javascript">
-	$(document).ready(function(){
-		var _urlpath = $(location).attr('pathname');
+				</ul>
+			</form>
+		</div>
+	</nav>
 
-		$('.nav-item').each(function(){
-			var _this = $(this);
-			var _str = _this.find('a').attr('href');
-			_str !== _urlpath ? _this.removeClass('active') : _this.addClass('active');
+	<!-- Script para el nav activo dependiendo de la pagina donde estemos -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var _urlpath = $(location).attr('pathname');
+
+			$('.nav-item').each(function(){
+				var _this = $(this);
+				var _str = _this.find('a').attr('href');
+				_str !== _urlpath ? _this.removeClass('active') : _this.addClass('active');
+			});
 		});
-	});
-</script>
+	</script>
