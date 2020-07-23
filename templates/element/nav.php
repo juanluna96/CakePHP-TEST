@@ -63,8 +63,7 @@
 	
 	<?php 
 	$this->Breadcrumbs->setTemplates([
-		'wrapper' => '<nav class="breadcrumbs mt-2 ml-3"><ol class="breadcrumb bg-light" {{attrs}}>{{content}}</ol></nav>',
-		'item' => '<li class="breadcrumb-item" {{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
+		'wrapper' => '<nav class="breadcrumbs mt-2 ml-3"><ol class="breadcrumb bg-light" {{attrs}}>{{content}}</ol></nav>'
 	]);
 	echo $this->Breadcrumbs->render(); 
 	?>
@@ -87,3 +86,9 @@
 			});
 		});
 	</script>
+
+	<style>
+		.active a{
+			color: black;
+		}
+	</style>

@@ -4,7 +4,8 @@
 
 <?php $this->Breadcrumbs->add(
 	'Inicio',
-	['controller' => 'Blogs', 'action' => 'index']
+	['controller' => 'Blogs', 'action' => 'index'],
+	['class' => 'breadcrumb-item active']
 ); ?>
 
 <!--====  End of Crear separador o indicador de paginas  ====-->
