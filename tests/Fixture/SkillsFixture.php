@@ -22,8 +22,12 @@ class SkillsFixture extends TestFixture
         'nombre' => ['type' => 'string', 'length' => 30, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'fecha_creacion' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => 'current_timestamp()', 'comment' => ''],
         'fecha_modificacion' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => ''],
+        '_indexes' => [
+            'user_id' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
+        ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'skills_ibfk_1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -43,8 +47,8 @@ class SkillsFixture extends TestFixture
                 'id' => 1,
                 'user_id' => 1,
                 'nombre' => 'Lorem ipsum dolor sit amet',
-                'fecha_creacion' => '2020-07-22 12:55:42',
-                'fecha_modificacion' => '2020-07-22 12:55:42',
+                'fecha_creacion' => '2020-07-23 18:28:51',
+                'fecha_modificacion' => '2020-07-23 18:28:51',
             ],
         ];
         parent::init();
