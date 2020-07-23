@@ -57,7 +57,7 @@ class UsersController extends AppController
             $query=$this->Users->find('all')
             ->where(['Or' =>['username like'=>'%'.$key.'%','correo like'=>'%'.$key.'%']]);
         } else {
-            $query=$this->Users;
+            $query=$this->Users->find('all')->order(['Users.id ASC']);
         }
         
 
