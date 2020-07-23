@@ -56,6 +56,25 @@
 		</div>
 	</nav>
 
+	
+	<!--============================================================
+	=            Crear separador o indicador de paginas            =
+	=============================================================-->
+	
+	<?php 
+	$this->Breadcrumbs->setTemplates([
+		'wrapper' => '<nav class="breadcrumbs mt-2 ml-3"><ol class="breadcrumb bg-light" {{attrs}}>{{content}}</ol></nav>',
+		'item' => '<li class="breadcrumb-item" {{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
+	]);
+	echo $this->Breadcrumbs->render(); 
+	?>
+	
+	<!--====  End of Crear separador o indicador de paginas  ====-->
+	
+	
+
+
+
 	<!-- Script para el nav activo dependiendo de la pagina donde estemos -->
 	<script type="text/javascript">
 		$(document).ready(function(){

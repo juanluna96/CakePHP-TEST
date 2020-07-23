@@ -37,5 +37,7 @@ class AppView extends View
      */
     public function initialize(): void
     {
+        // Anadir referenciador o divisor de este estilo Pagina1/Pagina2/Pagina3
+        $this->loadHelper('Breadcrumbs');
     }
 }

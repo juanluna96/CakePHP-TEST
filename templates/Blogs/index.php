@@ -1,3 +1,13 @@
+<!--============================================================
+=            Crear separador o indicador de paginas            =
+=============================================================-->
+
+<?php $this->Breadcrumbs->add(
+	'Inicio',
+	['controller' => 'Blogs', 'action' => 'index']
+); ?>
+
+<!--====  End of Crear separador o indicador de paginas  ====-->
 
 <div class="mt-4 mx-auto row" >
 
